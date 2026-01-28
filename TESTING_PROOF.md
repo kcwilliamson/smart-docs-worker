@@ -1,4 +1,4 @@
-# Testing & Proof of Concept
+# Smart Documentation Worker - Environment Detection: Testing & Proof of Concept
 
 ## ✅ Deployment Status
 

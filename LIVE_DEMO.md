@@ -1,4 +1,4 @@
-# 🚀 Live Demo & Proof of Concept
+# 🚀 Smart Documentation Worker - Environment Detection: Live Demo & Proof of Concept
 
 ## ✅ Status: DEPLOYED & WORKING
 

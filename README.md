@@ -1,4 +1,4 @@
-# Smart Documentation Worker
+# Smart Documentation Worker - Environment Detection
 
 A Cloudflare Worker that makes technical documentation more approachable by personalizing it based on the user's environment. No more mental mapping - see only the instructions relevant to YOUR setup.
 

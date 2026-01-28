@@ -1,7 +1,7 @@
 {
   "name": "smart-docs-worker",
   "version": "1.0.0",
-  "description": "Cloudflare Worker that personalizes technical documentation based on user environment",
+  "description": "Smart Documentation Worker - Environment Detection: Cloudflare Worker that personalizes technical documentation based on user environment",
   "main": "src/index.js",
   "scripts": {
     "dev": "wrangler dev",

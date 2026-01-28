@@ -1,4 +1,4 @@
-# UX Case Study: Smart Documentation Worker
+# UX Case Study: Smart Documentation Worker - Environment Detection
 
 ## Project Overview
 
