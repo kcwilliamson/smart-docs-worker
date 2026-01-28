@@ -1,4 +1,4 @@
-# UX Case Study: Smart Documentation Worker
+# Smart Documentation Worker - Environment Dectection
 
 ## Project Overview
 
@@ -6,7 +6,7 @@
 
 **Solution:** Build a Cloudflare Worker that detects user environment and personalizes documentation in real-time.
 
-**Impact:** 80% reduction in time-to-comprehension, improved developer experience, zero client-side performance impact.
+**Impact:** Reduction in time-to-comprehension, improved developer experience, zero client-side performance impact.
 
 ---
 
