@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="user-os" content="unknown">
+    <title>GitHub CLI Installation - Smart Docs</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #0d1117;
+            color: #c9d1d9;
+            line-height: 1.6;
+        }
+        
+        h1 {
+            color: #58a6ff;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #8b949e;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .alert {
+            background: #1f6feb;
+            border-left: 4px solid #58a6ff;
+            padding: 16px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        
+        .os-section {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        
+        .os-section h2 {
+            color: #58a6ff;
+            margin-top: 0;
+        }
+        
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            margin: 16px 0;
+            color: #e6edf3;
+        }
+        
+        .code-block .comment {
+            color: #8b949e;
+        }
+        
+        .tip {
+            background: #1a2127;
+            border-left: 4px solid #3fb950;
+            padding: 16px;
+            border-radius: 6px;
+            margin: 16px 0;
+        }
+        
+        .tip strong {
+            color: #3fb950;
+        }
+        
+        .shortcut-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .shortcut-table th {
+            background: #161b22;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid #30363d;
+            color: #58a6ff;
+        }
+        
+        .shortcut-table td {
+            padding: 12px;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        .kbd {
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #e6edf3;
+            display: inline-block;
+            margin: 0 2px;
+        }
+        
+        a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>📦 GitHub CLI (gh)</h1>
+    <div class="subtitle">GitHub on the command line</div>
+    
+    <div class="alert">
+        <strong>✨ Smart Documentation:</strong> These instructions are personalized for your operating system.
+    </div>
+    
+    <p>GitHub CLI brings GitHub to your terminal. Free and open source.</p>
+    
+    <!-- macOS Installation -->
+    <div class="os-mac os-section">
+        <h2>🍎 Installation on macOS</h2>
+        
+        <h3>Using Homebrew (Recommended)</h3>
+        <div class="code-block"><span class="comment"># Install gh</span>
+brew install gh
+
+<span class="comment"># Upgrade if already installed</span>
+brew upgrade gh</div>
+        
+        <h3>Using MacPorts</h3>
+        <div class="code-block">sudo port install gh</div>
+        
+        <h3>Manual Installation</h3>
+        <p>Download the <a href="#">.pkg installer</a> and run it.</p>
+        
+        <div class="tip">
+            <strong>💡 macOS Tip:</strong> After installation, authenticate with:<br>
+            <code>gh auth login</code>
+        </div>
+        
+        <h3>Keyboard Shortcuts in Terminal</h3>
+        <table class="shortcut-table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Shortcut</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Clear terminal</td>
+                    <td><span class="kbd">⌘</span> + <span class="kbd">K</span></td>
+                </tr>
+                <tr>
+                    <td>New tab</td>
+                    <td><span class="kbd">⌘</span> + <span class="kbd">T</span></td>
+                </tr>
+                <tr>
+                    <td>Interrupt command</td>
+                    <td><span class="kbd">⌃</span> + <span class="kbd">C</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Windows Installation -->
+    <div class="os-windows os-section">
+        <h2>🪟 Installation on Windows</h2>
+        
+        <h3>Using winget (Recommended)</h3>
+        <div class="code-block"><span class="comment"># Install gh</span>
+winget install --id GitHub.cli
+
+<span class="comment"># Upgrade if already installed</span>
+winget upgrade --id GitHub.cli</div>
+        
+        <h3>Using Scoop</h3>
+        <div class="code-block">scoop install gh</div>
+        
+        <h3>Using Chocolatey</h3>
+        <div class="code-block">choco install gh</div>
+        
+        <h3>Manual Installation</h3>
+        <p>Download the <a href="#">.msi installer</a> and run it.</p>
+        
+        <div class="tip">
+            <strong>💡 Windows Tip:</strong> Use Windows Terminal for the best experience:<br>
+            <code>winget install Microsoft.WindowsTerminal</code>
+        </div>
+        
+        <h3>Keyboard Shortcuts in Terminal</h3>
+        <table class="shortcut-table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Shortcut</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Clear terminal</td>
+                    <td><span class="kbd">Ctrl</span> + <span class="kbd">L</span></td>
+                </tr>
+                <tr>
+                    <td>New tab</td>
+                    <td><span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">T</span></td>
+                </tr>
+                <tr>
+                    <td>Interrupt command</td>
+                    <td><span class="kbd">Ctrl</span> + <span class="kbd">C</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Linux Installation -->
+    <div class="os-linux os-section">
+        <h2>🐧 Installation on Linux</h2>
+        
+        <h3>Debian/Ubuntu</h3>
+        <div class="code-block"><span class="comment"># Add GitHub's package repository</span>
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+
+<span class="comment"># Install gh</span>
+sudo apt update
+sudo apt install gh</div>
+        
+        <h3>Fedora/CentOS/RHEL</h3>
+        <div class="code-block">sudo dnf install gh</div>
+        
+        <h3>Arch Linux</h3>
+        <div class="code-block">sudo pacman -S github-cli</div>
+        
+        <h3>Snap</h3>
+        <div class="code-block">sudo snap install gh</div>
+        
+        <div class="tip">
+            <strong>💡 Linux Tip:</strong> Add gh to your shell completion:<br>
+            <code>gh completion -s bash >> ~/.bashrc</code>
+        </div>
+        
+        <h3>Keyboard Shortcuts in Terminal</h3>
+        <table class="shortcut-table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Shortcut</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Clear terminal</td>
+                    <td><span class="kbd">Ctrl</span> + <span class="kbd">L</span></td>
+                </tr>
+                <tr>
+                    <td>New tab</td>
+                    <td><span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">T</span></td>
+                </tr>
+                <tr>
+                    <td>Interrupt command</td>
+                    <td><span class="kbd">Ctrl</span> + <span class="kbd">C</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Common Next Steps -->
+    <div style="background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 24px; margin: 24px 0;">
+        <h2 style="color: #58a6ff; margin-top: 0;">✨ Next Steps</h2>
+        
+        <h3>Authenticate with GitHub</h3>
+        <div class="code-block">gh auth login</div>
+        
+        <h3>Common Commands</h3>
+        <div class="code-block"><span class="comment"># Clone a repo</span>
+gh repo clone owner/repo
+
+<span class="comment"># Create a PR</span>
+gh pr create
+
+<span class="comment"># View issues</span>
+gh issue list
+
+<span class="comment"># Run a workflow</span>
+gh workflow run</div>
+        
+        <p>Learn more: <a href="https://cli.github.com/manual">cli.github.com/manual</a></p>
+    </div>
+    
+    <div style="background: #1a2127; border-left: 4px solid #58a6ff; padding: 16px; border-radius: 6px; margin-top: 40px;">
+        <strong>🎯 Smart Documentation in Action</strong><br>
+        You only see the installation method for YOUR operating system. No mental filtering required!<br><br>
+        <strong>Live Demo:</strong> <a href="https://smart-docs-worker.pcx-team.workers.dev">smart-docs-worker.pcx-team.workers.dev</a>
+    </div>
+</body>
+</html>

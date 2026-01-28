@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="user-os" content="unknown">
+    <title>Docker Installation - Smart Docs Example</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        h1 {
+            color: #2496ED;
+            border-bottom: 3px solid #2496ED;
+            padding-bottom: 10px;
+        }
+        
+        .detected-os {
+            background: #e7f3ff;
+            border-left: 4px solid #2496ED;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .os-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .os-mac { border-left: 4px solid #000; }
+        .os-windows { border-left: 4px solid #0078D4; }
+        .os-linux { border-left: 4px solid #FCC624; }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Monaco', monospace;
+            margin: 15px 0;
+        }
+        
+        .step {
+            margin: 20px 0;
+        }
+        
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: #2496ED;
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐳 Install Docker</h1>
+    
+    <div class="detected-os">
+        <strong>Smart Docs Enabled:</strong> Showing installation instructions for your operating system.
+    </div>
+    
+    <!-- macOS Installation -->
+    <div class="os-mac os-section">
+        <h2>🍎 Install Docker on macOS</h2>
+        
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Download Docker Desktop for Mac</strong>
+        </div>
+        <p>Visit <a href="#">docker.com/products/docker-desktop</a> and download Docker Desktop for Mac.</p>
+        
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Install using Homebrew (Alternative)</strong>
+        </div>
+        <div class="code-block">brew install --cask docker</div>
+        
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Verify Installation</strong>
+        </div>
+        <div class="code-block">docker --version
+docker run hello-world</div>
+        
+        <div class="step">
+            <span class="step-number">4</span>
+            <strong>Start Docker</strong>
+        </div>
+        <p>Launch Docker from Applications folder or use:</p>
+        <div class="code-block">open /Applications/Docker.app</div>
+        
+        <div style="background: #fff3cd; padding: 15px; border-radius: 6px; margin-top: 20px;">
+            <strong>💡 Mac Tip:</strong> Docker Desktop includes Docker Compose. Use <code>⌘ + Space</code> to quickly launch Docker.
+        </div>
+    </div>
+    
+    <!-- Windows Installation -->
+    <div class="os-windows os-section">
+        <h2>🪟 Install Docker on Windows</h2>
+        
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>System Requirements</strong>
+        </div>
+        <p>You need Windows 10/11 Pro, Enterprise, or Education with Hyper-V support.</p>
+        
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Install using winget</strong>
+        </div>
+        <div class="code-block">winget install Docker.DockerDesktop</div>
+        
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Or Download Installer</strong>
+        </div>
+        <p>Visit <a href="#">docker.com/products/docker-desktop</a> and download Docker Desktop for Windows.</p>
+        
+        <div class="step">
+            <span class="step-number">4</span>
+            <strong>Enable WSL 2 (Recommended)</strong>
+        </div>
+        <div class="code-block">wsl --install
+wsl --set-default-version 2</div>
+        
+        <div class="step">
+            <span class="step-number">5</span>
+            <strong>Verify Installation</strong>
+        </div>
+        <div class="code-block">docker --version
+docker run hello-world</div>
+        
+        <div style="background: #fff3cd; padding: 15px; border-radius: 6px; margin-top: 20px;">
+            <strong>💡 Windows Tip:</strong> Use Windows Terminal for the best Docker experience. Press <code>Ctrl + `</code> in VS Code to open terminal.
+        </div>
+    </div>
+    
+    <!-- Linux Installation -->
+    <div class="os-linux os-section">
+        <h2>🐧 Install Docker on Linux</h2>
+        
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Update Package Index</strong>
+        </div>
+        <div class="code-block">sudo apt update</div>
+        
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>Install Prerequisites</strong>
+        </div>
+        <div class="code-block">sudo apt install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release</div>
+        
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>Add Docker's GPG Key</strong>
+        </div>
+        <div class="code-block">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</div>
+        
+        <div class="step">
+            <span class="step-number">4</span>
+            <strong>Install Docker Engine</strong>
+        </div>
+        <div class="code-block">sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io</div>
+        
+        <div class="step">
+            <span class="step-number">5</span>
+            <strong>Add User to Docker Group</strong>
+        </div>
+        <div class="code-block">sudo usermod -aG docker $USER
+newgrp docker</div>
+        
+        <div class="step">
+            <span class="step-number">6</span>
+            <strong>Verify Installation</strong>
+        </div>
+        <div class="code-block">docker --version
+docker run hello-world</div>
+        
+        <div style="background: #fff3cd; padding: 15px; border-radius: 6px; margin-top: 20px;">
+            <strong>💡 Linux Tip:</strong> No need for Docker Desktop on Linux - Docker Engine is lighter and faster!
+        </div>
+    </div>
+    
+    <div style="margin-top: 40px; padding: 20px; background: #e7f3ff; border-radius: 8px;">
+        <h3>✨ This is Smart Documentation</h3>
+        <p>On a real deployment, you would only see the installation instructions for YOUR operating system. No more scrolling through Windows instructions when you're on Mac, or vice versa!</p>
+        <p><strong>Try it:</strong> <a href="https://smart-docs-worker.pcx-team.workers.dev">https://smart-docs-worker.pcx-team.workers.dev</a></p>
+    </div>
+</body>
+</html>
