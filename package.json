@@ -1,0 +1,23 @@
+{
+  "name": "smart-docs-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker that personalizes technical documentation based on user environment",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "keywords": [
+    "cloudflare",
+    "worker",
+    "documentation",
+    "ux",
+    "personalization"
+  ],
+  "author": "Katie Williamson",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

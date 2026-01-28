@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="user-os" content="unknown">
+    <title>Get Started with Cloudflare Workers - Smart Docs Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #f9fafb;
+        }
+        
+        /* Cloudflare Header */
+        .cf-header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
+        .cf-header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .cf-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #f6821f;
+            text-decoration: none;
+        }
+        
+        .cf-nav {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+        }
+        
+        .cf-nav a {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .cf-nav a:hover {
+            color: #f6821f;
+        }
+        
+        /* Smart Personalization Banner */
+        .smart-banner {
+            background: linear-gradient(135deg, #f6821f 0%, #ff6b35 100%);
+            color: white;
+            padding: 12px 24px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .smart-banner strong {
+            font-weight: 700;
+        }
+        
+        /* Main Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+            padding: 40px 24px;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 8px;
+        }
+        
+        .sidebar a {
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .sidebar a:hover {
+            background: #f3f4f6;
+            color: #f6821f;
+        }
+        
+        .sidebar a.active {
+            background: #fef3ec;
+            color: #f6821f;
+            font-weight: 600;
+        }
+        
+        /* Content */
+        .content {
+            background: white;
+            padding: 48px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            max-width: 900px;
+        }
+        
+        /* Environment Detection Badge */
+        .env-badge-container {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .env-icon {
+            font-size: 24px;
+        }
+        
+        .env-badge-text {
+            flex: 1;
+        }
+        
+        .env-badge-text strong {
+            display: block;
+            color: #1e40af;
+            margin-bottom: 4px;
+        }
+        
+        .env-badge-text small {
+            color: #3b82f6;
+            font-size: 13px;
+        }
+        
+        .os-indicator {
+            background: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #1e40af;
+            font-size: 14px;
+        }
+        
+        /* Typography */
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111827;
+            margin: 48px 0 20px 0;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #374151;
+            margin: 32px 0 16px 0;
+        }
+        
+        p {
+            margin-bottom: 16px;
+            color: #4b5563;
+            font-size: 16px;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            position: relative;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .code-label {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #374151;
+            color: #9ca3af;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        /* OS-Specific Sections */
+        .os-section {
+            margin: 24px 0;
+        }
+        
+        .os-mac .os-section-header {
+            background: linear-gradient(135deg, #000000 0%, #434343 100%);
+        }
+        
+        .os-windows .os-section-header {
+            background: linear-gradient(135deg, #0078D4 0%, #00BCF2 100%);
+        }
+        
+        .os-linux .os-section-header {
+            background: linear-gradient(135deg, #FCC624 0%, #F47B00 100%);
+        }
+        
+        .os-section-header {
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+        
+        .os-section-content {
+            border: 1px solid #e5e7eb;
+            border-top: none;
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+            background: #fafafa;
+        }
+        
+        /* Keyboard Shortcuts */
+        .shortcut-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .shortcut-table th {
+            background: #f3f4f6;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .shortcut-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .kbd {
+            display: inline-block;
+            background: linear-gradient(180deg, #ffffff 0%, #e5e7eb 100%);
+            border: 1px solid #9ca3af;
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-family: 'Monaco', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 0 2px;
+        }
+        
+        /* Info Boxes */
+        .info-box {
+            background: #fef3ec;
+            border-left: 4px solid #f6821f;
+            padding: 16px 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+        
+        .info-box strong {
+            color: #d97706;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .tip-box {
+            background: #ecfdf5;
+            border-left: 4px solid #10b981;
+            padding: 16px 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+        
+        .tip-box strong {
+            color: #059669;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+        
+        .breadcrumbs a {
+            color: #f6821f;
+            text-decoration: none;
+        }
+        
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Step Numbers */
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #f6821f;
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            margin-right: 12px;
+            font-size: 16px;
+        }
+        
+        /* Tab Selection (for showing all OS options) */
+        .os-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .os-tab {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #6b7280;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+        
+        .os-tab.active {
+            color: #f6821f;
+            border-bottom-color: #f6821f;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cloudflare Header -->
+    <div class="cf-header">
+        <div class="cf-header-content">
+            <a href="#" class="cf-logo">☁️ Cloudflare Developers</a>
+            <nav class="cf-nav">
+                <a href="#">Workers</a>
+                <a href="#">Pages</a>
+                <a href="#">R2</a>
+                <a href="#">D1</a>
+                <a href="#">API</a>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- Smart Personalization Banner -->
+    <div class="smart-banner">
+        ✨ <strong>Smart Docs Enabled:</strong> This page is personalized for your operating system
+    </div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h3>Getting Started</h3>
+            <ul>
+                <li><a href="#" class="active">Quick Start</a></li>
+                <li><a href="#">Installation</a></li>
+                <li><a href="#">Your First Worker</a></li>
+                <li><a href="#">Deploy to Production</a></li>
+            </ul>
+            
+            <h3 style="margin-top: 32px;">CLI Reference</h3>
+            <ul>
+                <li><a href="#">Commands</a></li>
+                <li><a href="#">Configuration</a></li>
+                <li><a href="#">Troubleshooting</a></li>
+            </ul>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                <a href="#">Home</a> / <a href="#">Workers</a> / <span>Get Started</span>
+            </div>
+            
+            <!-- Environment Detection Badge -->
+            <div class="env-badge-container">
+                <span class="env-icon">🎯</span>
+                <div class="env-badge-text">
+                    <strong>Personalized Documentation</strong>
+                    <small>We've detected your environment and customized these instructions for you</small>
+                </div>
+                <div class="os-indicator">
+                    <span class="os-mac">🍎 macOS</span>
+                    <span class="os-windows">🪟 Windows</span>
+                    <span class="os-linux">🐧 Linux</span>
+                </div>
+            </div>
+            
+            <h1>Get Started with Cloudflare Workers</h1>
+            <p>Cloudflare Workers allows you to deploy serverless code instantly across the globe. This guide will help you install Wrangler, the Workers CLI, and deploy your first Worker.</p>
+            
+            <!-- Installation Section -->
+            <h2><span class="step-number">1</span>Install Wrangler CLI</h2>
+            
+            <p>Wrangler is the official CLI for managing Cloudflare Workers. Install it using your preferred package manager:</p>
+            
+            <!-- macOS Section -->
+            <div class="os-mac os-section">
+                <div class="os-section-header">
+                    🍎 Installation for macOS
+                </div>
+                <div class="os-section-content">
+                    <p><strong>Recommended:</strong> Install via npm (included with Node.js)</p>
+                    <div class="code-block">
+                        <div class="code-label">Terminal</div>
+                        <pre># Install Wrangler globally
+npm install -g wrangler
+
+# Or use Homebrew if you prefer
+brew install cloudflare-wrangler2</pre>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>💡 Mac Tip:</strong>
+                        If you don't have Node.js installed, we recommend using Homebrew: <code>brew install node</code>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Windows Section -->
+            <div class="os-windows os-section">
+                <div class="os-section-header">
+                    🪟 Installation for Windows
+                </div>
+                <div class="os-section-content">
+                    <p><strong>Recommended:</strong> Install via npm using PowerShell</p>
+                    <div class="code-block">
+                        <div class="code-label">PowerShell</div>
+                        <pre># Install Wrangler globally
+npm install -g wrangler
+
+# Or use winget
+winget install Cloudflare.Wrangler</pre>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>💡 Windows Tip:</strong>
+                        We recommend using Windows Terminal for the best experience. Install Node.js from <a href="#">nodejs.org</a> if you haven't already.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Linux Section -->
+            <div class="os-linux os-section">
+                <div class="os-section-header">
+                    🐧 Installation for Linux
+                </div>
+                <div class="os-section-content">
+                    <p><strong>Recommended:</strong> Install via npm</p>
+                    <div class="code-block">
+                        <div class="code-label">Bash</div>
+                        <pre># Install Wrangler globally
+npm install -g wrangler
+
+# On Ubuntu/Debian, you might need to install Node.js first:
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs</pre>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>💡 Linux Tip:</strong>
+                        If you encounter permission errors, avoid using <code>sudo</code> with npm. Instead, configure npm to use a different directory.
+                    </div>
+                </div>
+            </div>
+            
+            <h2><span class="step-number">2</span>Verify Installation</h2>
+            
+            <p>After installing, verify that Wrangler is installed correctly:</p>
+            
+            <div class="code-block">
+                <pre>wrangler --version</pre>
+            </div>
+            
+            <h2><span class="step-number">3</span>Authenticate with Cloudflare</h2>
+            
+            <p>Login to your Cloudflare account using Wrangler:</p>
+            
+            <div class="code-block">
+                <pre>wrangler login</pre>
+            </div>
+            
+            <p>This will open your browser to complete authentication.</p>
+            
+            <!-- Keyboard Shortcuts Section -->
+            <h2>Essential Keyboard Shortcuts</h2>
+            
+            <p>Speed up your development workflow with these shortcuts in your terminal:</p>
+            
+            <!-- macOS Shortcuts -->
+            <div class="os-mac">
+                <table class="shortcut-table">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Shortcut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Open new terminal tab</td>
+                            <td><span class="kbd">⌘</span> + <span class="kbd">T</span></td>
+                        </tr>
+                        <tr>
+                            <td>Clear terminal</td>
+                            <td><span class="kbd">⌘</span> + <span class="kbd">K</span></td>
+                        </tr>
+                        <tr>
+                            <td>Stop running process</td>
+                            <td><span class="kbd">⌃</span> + <span class="kbd">C</span></td>
+                        </tr>
+                        <tr>
+                            <td>Search command history</td>
+                            <td><span class="kbd">⌃</span> + <span class="kbd">R</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Windows Shortcuts -->
+            <div class="os-windows">
+                <table class="shortcut-table">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Shortcut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Open new terminal tab</td>
+                            <td><span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">T</span></td>
+                        </tr>
+                        <tr>
+                            <td>Clear terminal</td>
+                            <td><span class="kbd">Ctrl</span> + <span class="kbd">L</span></td>
+                        </tr>
+                        <tr>
+                            <td>Stop running process</td>
+                            <td><span class="kbd">Ctrl</span> + <span class="kbd">C</span></td>
+                        </tr>
+                        <tr>
+                            <td>Search command history</td>
+                            <td><span class="kbd">Ctrl</span> + <span class="kbd">R</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Linux Shortcuts -->
+            <div class="os-linux">
+                <table class="shortcut-table">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Shortcut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Open new terminal tab</td>
+                            <td><span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">T</span></td>
+                        </tr>
+                        <tr>
+                            <td>Clear terminal</td>
+                            <td><span class="kbd">Ctrl</span> + <span class="kbd">L</span></td>
+                        </tr>
+                        <tr>
+                            <td>Stop running process</td>
+                            <td><span class="kbd">Ctrl</span> + <span class="kbd">C</span></td>
+                        </tr>
+                        <tr>
+                            <td>Search command history</td>
+                            <td><span class="kbd">Ctrl</span> + <span class="kbd">R</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h2><span class="step-number">4</span>Create Your First Worker</h2>
+            
+            <p>Use Wrangler to scaffold a new Worker project:</p>
+            
+            <div class="code-block">
+                <pre>wrangler init my-worker
+cd my-worker</pre>
+            </div>
+            
+            <!-- Configuration File Paths (OS-specific) -->
+            <h2>Configuration Files</h2>
+            
+            <p>Wrangler stores its configuration in the following locations:</p>
+            
+            <div class="os-mac">
+                <div class="info-box">
+                    <strong>macOS Configuration Path:</strong>
+                    <code>~/.config/wrangler/config.toml</code><br>
+                    <code>~/Library/Application Support/wrangler/</code>
+                </div>
+            </div>
+            
+            <div class="os-windows">
+                <div class="info-box">
+                    <strong>Windows Configuration Path:</strong>
+                    <code>%APPDATA%\wrangler\config.toml</code><br>
+                    <code>C:\Users\YourName\AppData\Roaming\wrangler\</code>
+                </div>
+            </div>
+            
+            <div class="os-linux">
+                <div class="info-box">
+                    <strong>Linux Configuration Path:</strong>
+                    <code>~/.config/wrangler/config.toml</code><br>
+                    <code>$XDG_CONFIG_HOME/wrangler/</code>
+                </div>
+            </div>
+            
+            <h2><span class="step-number">5</span>Deploy to Production</h2>
+            
+            <p>When you're ready, deploy your Worker to Cloudflare's global network:</p>
+            
+            <div class="code-block">
+                <pre>wrangler deploy</pre>
+            </div>
+            
+            <div class="tip-box">
+                <strong>🎉 Congratulations!</strong>
+                Your Worker is now running on Cloudflare's edge network in 300+ cities worldwide.
+            </div>
+            
+            <h2>Next Steps</h2>
+            
+            <p>Now that you have Wrangler installed and your first Worker deployed, explore these resources:</p>
+            
+            <ul style="margin-left: 20px; margin-bottom: 20px;">
+                <li style="margin-bottom: 8px;"><a href="#" style="color: #f6821f;">Learn about Workers runtime APIs</a></li>
+                <li style="margin-bottom: 8px;"><a href="#" style="color: #f6821f;">Connect to D1 database</a></li>
+                <li style="margin-bottom: 8px;"><a href="#" style="color: #f6821f;">Store files in R2</a></li>
+                <li style="margin-bottom: 8px;"><a href="#" style="color: #f6821f;">Add environment variables</a></li>
+            </ul>
+        </main>
+    </div>
+    
+    <script>
+        // Log detected environment
+        const userOs = document.querySelector('meta[name="user-os"]')?.content || 'unknown';
+        console.log('📱 Detected OS:', userOs);
+        console.log('✨ Page personalized for your environment');
+        console.log('💡 Try opening this page on different devices to see different content!');
+    </script>
+</body>
+</html>
