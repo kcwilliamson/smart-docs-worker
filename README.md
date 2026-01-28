@@ -22,12 +22,18 @@ Traditional documentation is one-size-fits-all, forcing users to:
 
 ## ✨ The Solution
 
-This Cloudflare Worker automatically detects the user's environment (OS, browser, location) and personalizes documentation in real-time using HTMLRewriter:
+This Cloudflare Worker automatically detects the user's environment (OS, browser, location) and **silently** personalizes documentation in real-time using HTMLRewriter:
 
 - **Mac users** see Command (⌘) shortcuts, not Ctrl
 - **Windows users** see Windows-specific installation commands
 - **Linux users** see apt/bash examples
+- **No messaging** - users don't see "we detected your OS"
+- **Invisible personalization** - content just works for their environment
 - **Geographic customization** possible with Cloudflare's geolocation data
+
+### Silent Mode
+
+The Worker operates in **silent mode** by default - there are no banners, badges, or messages telling users their environment was detected. The content simply appears as if it was written specifically for their operating system. This creates a natural, clean user experience without any UI clutter.
 
 ## 🚀 Features
 
