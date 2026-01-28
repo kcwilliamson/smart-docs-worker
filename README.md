@@ -2,6 +2,14 @@
 
 A Cloudflare Worker that makes technical documentation more approachable by personalizing it based on the user's environment. No more mental mapping - see only the instructions relevant to YOUR setup.
 
+## 🌐 Live Demo
+
+**Try it now:** https://smart-docs-worker.pcx-team.workers.dev
+
+**API Endpoint:** https://smart-docs-worker.pcx-team.workers.dev/api/environment
+
+**Status:** ✅ Deployed and working (verified with 95%+ confidence)
+
 ## 🎯 The UX Problem
 
 Traditional documentation is one-size-fits-all, forcing users to:
